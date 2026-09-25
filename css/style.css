@@ -1,0 +1,1547 @@
+/* =========================================================
+   LOCAL FONTS
+   ========================================================= */
+
+@font-face {
+  font-family: "Syne";
+  src: url("../fonts/Syne/Syne-VariableFont_wght.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("../fonts/Instrument_Serif/InstrumentSerif-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("../fonts/Instrument_Serif/InstrumentSerif-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("../fonts/DM_Sans/DMSans-VariableFont_opsz\,wght.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("../fonts/DM_Sans/DMSans-Italic-VariableFont_opsz\,wght.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* =========================================================
+   VARIABLES
+   ========================================================= */
+
+:root {
+  --bg: #000000;
+  --surface: #111111;
+  --surface-2: #0b0b0b;
+  --border: #1d1d1d;
+
+  --wine: #6d001a;
+  --wine-bright: #8a0b2c;
+
+  --white: #ffffff;
+  --silver: #a0a0a0;
+  --muted: #707070;
+
+  --max: 1240px;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+
+  background: var(--bg);
+  color: var(--white);
+
+  font-family: "DM Sans", Arial, sans-serif;
+
+  line-height: 1.7;
+
+  overflow-x: hidden;
+}
+
+body.intro-active {
+  overflow: hidden;
+}
+
+
+img {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+em {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 1.08em;
+}
+
+
+/* =========================================================
+   INTRO SCREEN
+   ========================================================= */
+
+.intro-screen {
+  position: fixed;
+  inset: 0;
+
+  z-index: 99999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #000000;
+
+  opacity: 1;
+  visibility: visible;
+
+  transition:
+    opacity 0.9s ease,
+    visibility 0.9s ease;
+}
+
+.intro-screen.hide {
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+}
+
+.intro-inner {
+  width: min(90%, 1100px);
+}
+
+.intro-label {
+  margin: 0 0 30px;
+
+  color: #777777;
+
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+
+  opacity: 0;
+
+  transform: translateY(20px);
+
+  animation:
+    introFadeUp 0.8s ease forwards;
+}
+
+.intro-inner h2 {
+  margin: 0;
+
+  font-family: "Syne", sans-serif;
+  font-size: clamp(55px, 10vw, 145px);
+  font-weight: 700;
+
+  line-height: 0.82;
+  letter-spacing: -0.075em;
+
+  opacity: 0;
+
+  transform: translateY(45px);
+
+  animation:
+    introTitle 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.intro-inner h2:nth-of-type(1) {
+  animation-delay: 0.1s;
+}
+
+.intro-inner h2:nth-of-type(2) {
+  color: transparent;
+
+  -webkit-text-stroke: 1px #ffffff;
+
+  animation-delay: 0.24s;
+}
+
+.intro-inner h2:nth-of-type(3) {
+  animation-delay: 0.38s;
+}
+
+.intro-line {
+  width: 0;
+  height: 1px;
+
+  margin-top: 35px;
+
+  background: var(--wine);
+
+  animation:
+    introLine 0.9s ease forwards;
+
+  animation-delay: 0.75s;
+}
+
+.intro-role {
+  margin: 18px 0 0;
+
+  color: #777777;
+
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+
+  opacity: 0;
+
+  animation:
+    introFadeUp 0.8s ease forwards;
+
+  animation-delay: 0.95s;
+}
+
+
+@keyframes introFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes introTitle {
+  from {
+    opacity: 0;
+    transform: translateY(45px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes introLine {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+
+/* =========================================================
+   CUSTOM CURSOR
+   ========================================================= */
+
+.cursor-dot {
+  position: fixed;
+
+  width: 6px;
+  height: 6px;
+
+  background: #ffffff;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  z-index: 100000;
+
+  transform: translate(-50%, -50%);
+}
+
+
+.cursor-circle {
+  position: fixed;
+
+  width: 38px;
+  height: 38px;
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  z-index: 99999;
+
+  transform: translate(-50%, -50%);
+
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+.cursor-circle.hover {
+  width: 64px;
+  height: 64px;
+
+  background: rgba(109, 0, 26, 0.22);
+
+  border-color: var(--wine);
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header {
+  position: fixed;
+
+  z-index: 1000;
+
+  top: 14px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: min(calc(100% - 28px), var(--max));
+
+  padding: 14px 18px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: rgba(10, 10, 10, 0.8);
+
+  border: 1px solid #222222;
+
+  backdrop-filter: blur(18px);
+
+  border-radius: 12px;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.header.scrolled {
+  background: rgba(0, 0, 0, 0.94);
+  border-color: #303030;
+}
+
+
+.brand {
+  max-width: 430px;
+
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  letter-spacing: 0.08em;
+}
+
+
+.header nav {
+  display: flex;
+  gap: 22px;
+
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+
+  color: #aaaaaa;
+}
+
+.header nav a {
+  transition: color 0.2s ease;
+}
+
+.header nav a:hover {
+  color: #ffffff;
+}
+
+
+.menu {
+  display: none;
+
+  background: transparent;
+  border: 0;
+
+  color: #ffffff;
+
+  font-size: 22px;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   MOBILE NAV
+   ========================================================= */
+
+.mobile-nav {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 999;
+
+  display: none;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 25px;
+
+  background: #050505;
+
+  transform: translateY(-100%);
+
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mobile-nav.open {
+  transform: translateY(0);
+}
+
+.mobile-nav a {
+  font-family: "Syne", sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   GENERAL SECTION
+   ========================================================= */
+
+.section {
+  width: min(calc(100% - 40px), var(--max));
+
+  margin: 0 auto;
+
+  padding: 115px 0;
+}
+
+.border {
+  border-top: 1px solid var(--border);
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+  min-height: 100vh;
+
+  padding-top: 180px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.eyebrow,
+.label,
+.case-head small,
+.palette small,
+.card small,
+.ai small,
+.hooklab > small {
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  line-height: 1.4;
+
+  letter-spacing: 0.14em;
+
+  color: #888888;
+}
+
+
+.hero h1 {
+  margin: 30px 0 65px;
+
+  font-family: "Syne", sans-serif;
+
+  font-size: clamp(58px, 10.8vw, 155px);
+  font-weight: 700;
+
+  line-height: 0.82;
+
+  letter-spacing: -0.075em;
+
+  transition: transform 0.25s ease-out;
+}
+
+
+.hero h1 span {
+  color: transparent;
+
+  -webkit-text-stroke: 1px #ffffff;
+}
+
+
+.hero-bottom {
+  display: grid;
+
+  grid-template-columns: minmax(220px, 300px) 1fr;
+
+  gap: 70px;
+
+  align-items: end;
+
+  border-top: 1px solid var(--border);
+
+  padding-top: 25px;
+}
+
+
+/* =========================================================
+   HERO IMAGE
+   ========================================================= */
+
+.tag {
+  position: relative;
+
+  width: 300px;
+  height: 380px;
+
+  overflow: hidden;
+
+  background: #111111;
+
+  flex-shrink: 0;
+}
+
+
+.tag img {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  filter: grayscale(10%);
+
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.5s ease;
+}
+
+
+.tag::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.82),
+      rgba(0, 0, 0, 0.08) 68%
+    );
+
+  pointer-events: none;
+}
+
+
+.tag span {
+  position: absolute;
+
+  left: 22px;
+  bottom: 22px;
+
+  z-index: 2;
+
+  max-width: 90%;
+
+  color: #ffffff;
+
+  font-family: "Syne", sans-serif;
+
+  font-size: 24px;
+  font-weight: 700;
+
+  line-height: 1.05;
+
+  letter-spacing: -0.04em;
+}
+
+
+.tag:hover img {
+  transform: scale(1.05);
+
+  filter: grayscale(0%);
+}
+
+
+/* =========================================================
+   HERO COPY
+   ========================================================= */
+
+.hero-copy {
+  max-width: 640px;
+}
+
+.lead {
+  margin-top: 0;
+
+  font-size: clamp(21px, 2.5vw, 31px);
+
+  line-height: 1.3;
+
+  color: #ffffff;
+}
+
+
+.hero-copy p:not(.lead) {
+  font-size: 16px;
+
+  color: var(--silver);
+
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn {
+  display: inline-block;
+
+  margin-top: 18px;
+
+  padding: 13px 20px;
+
+  background: var(--wine);
+
+  border: 1px solid var(--wine);
+
+  color: #ffffff;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.btn:hover {
+  background: var(--wine-bright);
+
+  border-color: var(--wine-bright);
+}
+
+.ghost {
+  margin-left: 8px;
+
+  background: transparent;
+
+  border-color: #333333;
+}
+
+.ghost:hover {
+  background: #111111;
+
+  border-color: #555555;
+}
+
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+
+h2,
+h3 {
+  font-family: "Syne", sans-serif;
+
+  line-height: 1.05;
+}
+
+h2 {
+  font-size: clamp(42px, 6vw, 82px);
+
+  letter-spacing: -0.055em;
+}
+
+h3 {
+  font-size: 25px;
+}
+
+
+.two {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 70px;
+}
+
+.two h2 {
+  margin: 35px 0;
+}
+
+.two h2 span {
+  color: #777777;
+}
+
+.two p,
+.case-head > p,
+.strategy p,
+.ai > p,
+.contact > p {
+  font-size: 16px;
+
+  color: var(--silver);
+
+  line-height: 1.8;
+}
+
+
+.two ul {
+  padding-left: 20px;
+
+  color: #aaaaaa;
+
+  font-size: 16px;
+
+  line-height: 2;
+}
+
+
+/* =========================================================
+   SKILLS
+   ========================================================= */
+
+.skills {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  margin-top: 65px;
+
+  border-top: 1px solid var(--border);
+}
+
+.skills div {
+  padding: 20px;
+
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 12px;
+
+  color: var(--wine);
+}
+
+.skills b {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #ffffff;
+
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   CASE HEAD
+   ========================================================= */
+
+.case-head {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 70px;
+
+  align-items: end;
+
+  margin: 70px 0 45px;
+}
+
+.case-head h2 {
+  margin: 12px 0 0;
+}
+
+.case-head > p {
+  font-size: 19px;
+}
+
+
+/* =========================================================
+   REAL IMAGE FRAMES
+   ========================================================= */
+
+.image-frame {
+  width: 100%;
+
+  height: 420px;
+
+  overflow: hidden;
+
+  background: #101010;
+
+  border: 1px solid var(--border);
+}
+
+.image-frame-large {
+  height: 540px;
+}
+
+.image-frame img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  transition:
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.image-frame:hover img {
+  transform: scale(1.025);
+}
+
+
+/* =========================================================
+   IMAGE GRID
+   ========================================================= */
+
+.image-grid-2 {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px;
+
+  margin-top: 12px;
+}
+
+.image-grid-2 .wide {
+  grid-column: 1 / -1;
+}
+
+
+/* =========================================================
+   PALETTE
+   ========================================================= */
+
+.palette {
+  display: grid;
+
+  grid-template-columns: 0.7fr 1.3fr;
+
+  gap: 35px;
+
+  margin-top: 12px;
+
+  padding: 30px;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+}
+
+.palette p,
+.card p {
+  color: #aaaaaa;
+
+  font-size: 16px;
+}
+
+
+.swatches {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 8px;
+}
+
+.swatches > div {
+  min-height: 135px;
+
+  padding: 12px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  border: 1px solid #ffffff18;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.swatches small {
+  margin-top: 4px;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 0;
+}
+
+.white {
+  background: #f6f2e9;
+  color: #111111;
+}
+
+.gold {
+  background: #c59d5c;
+  color: #111111;
+}
+.gold small{
+  color: white;
+}
+.slate {
+  background: #33240a;
+  color: #ffffff;
+}
+
+.rose {
+  background: #dda1a1;
+  color: #ffffff;
+}
+.rose small, .cream small{
+  color: #33240a;
+}
+.cream {
+  background: #ddc7a2;
+  color: #111111;
+}
+
+.onyx {
+  background: #0b0b0b;
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.card,
+.hooklab,
+.ai {
+  padding: 30px;
+
+  margin-top: 12px;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+}
+
+.card h3,
+.hooklab h3,
+.ai h3 {
+  font-size: 27px;
+}
+
+
+/* =========================================================
+   METRICS
+   ========================================================= */
+
+.metrics {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 12px;
+}
+
+.metrics div {
+  padding: 28px;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+}
+
+.metrics strong {
+  display: block;
+
+  font-family: "Syne", sans-serif;
+
+  font-size: 52px;
+
+  line-height: 1;
+}
+
+.metrics span {
+  color: #aaaaaa;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   NOTICE
+   ========================================================= */
+
+.notice {
+  padding: 25px;
+
+  background: #0e090a;
+
+  border: 1px solid #6d001a99;
+}
+
+.notice b {
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+
+  color: #d99;
+}
+
+.notice p {
+  margin-bottom: 0;
+
+  font-size: 14px !important;
+}
+
+
+/* =========================================================
+   STRATEGY
+   ========================================================= */
+
+.strategy {
+  padding: 42px 0;
+
+  border-top: 1px solid var(--border);
+}
+
+.strategy h3 {
+  font-size: 29px;
+}
+
+
+.example {
+  padding: 12px 18px;
+
+  background: #0b0b0b;
+
+  border-left: 2px solid var(--wine);
+
+  color: #dddddd;
+}
+
+
+/* =========================================================
+   HOOK GRID
+   ========================================================= */
+
+.hookgrid,
+.briefgrid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 10px;
+}
+
+.hookgrid > div,
+.briefgrid > div {
+  padding: 22px;
+
+  background: #0b0b0b;
+
+  border: 1px solid var(--border);
+}
+
+.hookgrid b,
+.briefgrid b {
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  color: #888888;
+}
+
+.hookgrid p,
+.briefgrid span {
+  display: block;
+
+  color: #dddddd;
+
+  font-size: 15px;
+}
+
+.briefgrid {
+  margin-top: 20px;
+}
+
+
+/* =========================================================
+   AI SECTION
+   ========================================================= */
+
+.ai {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 70px;
+}
+
+
+/* =========================================================
+   CAPABILITIES
+   ========================================================= */
+
+.capabilities {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 10px;
+
+  margin-top: 45px;
+}
+
+.capabilities > div {
+  padding: 22px;
+
+  background: #0b0b0b;
+
+  border: 1px solid var(--border);
+}
+
+.capabilities h3 {
+  font-size: 21px;
+}
+
+.capabilities p {
+  color: #aaaaaa;
+
+  font-size: 14px;
+
+  line-height: 2;
+}
+
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+
+.contact h2 {
+  margin: 45px 0;
+
+  font-size: clamp(58px, 9vw, 125px);
+
+  line-height: 0.86;
+}
+
+.contact h2 span {
+  color: var(--wine);
+
+  font-family: "Instrument Serif", serif;
+
+  font-weight: 400;
+
+  font-style: italic;
+
+  letter-spacing: -0.02em;
+}
+
+
+.links {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 18px;
+
+  margin-top: 50px;
+
+  padding-top: 25px;
+
+  border-top: 1px solid var(--border);
+}
+
+.links a {
+  color: #aaaaaa;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 13px;
+
+  transition: color 0.2s ease;
+}
+
+.links a:hover {
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+   ========================================================= */
+
+.section > .label,
+.two > *,
+.case-head > *,
+.skills > div,
+.palette,
+.image-frame,
+.image-grid-2 > *,
+.card,
+.metrics > div,
+.strategy,
+.hooklab,
+.ai,
+.capabilities > div {
+  opacity: 0;
+
+  transform: translateY(45px);
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.section > .label.visible,
+.two > *.visible,
+.case-head > *.visible,
+.skills > div.visible,
+.palette.visible,
+.image-frame.visible,
+.image-grid-2 > *.visible,
+.card.visible,
+.metrics > div.visible,
+.strategy.visible,
+.hooklab.visible,
+.ai.visible,
+.capabilities > div.visible {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   ANIMATION DELAYS
+   ========================================================= */
+
+.skills > div:nth-child(2),
+.metrics > div:nth-child(2),
+.capabilities > div:nth-child(2) {
+  transition-delay: 0.08s;
+}
+
+.skills > div:nth-child(3),
+.metrics > div:nth-child(3),
+.capabilities > div:nth-child(3) {
+  transition-delay: 0.16s;
+}
+
+.skills > div:nth-child(4),
+.capabilities > div:nth-child(4) {
+  transition-delay: 0.24s;
+}
+
+.skills > div:nth-child(5),
+.capabilities > div:nth-child(5) {
+  transition-delay: 0.32s;
+}
+
+.skills > div:nth-child(6) {
+  transition-delay: 0.4s;
+}
+
+
+/* =========================================================
+   DESKTOP CURSOR
+   ========================================================= */
+
+@media (min-width: 851px) {
+
+  body,
+  a,
+  button {
+    cursor: none;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .capabilities {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE NAV / TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .header nav {
+    display: none;
+  }
+
+  .menu {
+    display: block;
+  }
+
+  .mobile-nav {
+    display: flex;
+  }
+
+
+  .cursor-dot,
+  .cursor-circle {
+    display: none;
+  }
+
+
+  .hero-bottom,
+  .two,
+  .case-head,
+  .palette,
+  .ai {
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+  }
+
+
+  .tag {
+    width: 240px;
+    height: 315px;
+  }
+
+
+  .skills,
+  .metrics,
+  .hookgrid,
+  .briefgrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+  .swatches {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+  .capabilities {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .section {
+    width: calc(100% - 28px);
+
+    padding: 85px 0;
+  }
+
+
+  .header {
+    width: calc(100% - 18px);
+  }
+
+
+  .brand {
+    max-width: 235px;
+
+    line-height: 1.05;
+
+    overflow-wrap: anywhere;
+  }
+
+
+  .hero {
+    padding-top: 145px;
+  }
+
+
+  .hero h1 {
+    font-size: 15vw;
+  }
+
+
+  .tag {
+    width: 190px;
+    height: 250px;
+  }
+
+
+  .tag span {
+    left: 16px;
+    bottom: 17px;
+
+    font-size: 20px;
+  }
+
+
+  .skills,
+  .metrics,
+  .capabilities,
+  .hookgrid,
+  .briefgrid,
+  .image-grid-2,
+  .swatches {
+    grid-template-columns: 1fr;
+  }
+
+
+  .image-frame {
+    height: 300px;
+  }
+
+
+  .image-frame-large {
+    height: 340px;
+  }
+
+
+  .case-head h2 {
+    font-size: 15vw;
+  }
+
+
+  .contact h2 {
+    font-size: 18vw;
+  }
+
+
+  .links {
+    flex-direction: column;
+  }
+
+
+  .links a {
+    padding: 8px 0;
+
+    border-bottom: 1px solid #222222;
+  }
+
+
+  .intro-inner h2 {
+    font-size: 16vw;
+  }
+
+
+  .intro-role {
+    line-height: 1.5;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+  }
+
+}
